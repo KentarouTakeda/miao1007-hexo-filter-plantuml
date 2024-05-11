@@ -27,7 +27,7 @@ hexo.extend.tag.register('plantuml', (args, content) => {
 });
 
 hexo.extend.filter.register('before_post_render', (data) => {
-    if (!ignore(data)) {
+    if (!ignore(data) && !data.disableNunjucks) {
         data.content = data.content
             .replace(reg, (raw, start, startQuote, lang, content, endQuote, end) => {
                 return start + '{% plantuml %}' + content + '{% endplantuml %}' + end;
